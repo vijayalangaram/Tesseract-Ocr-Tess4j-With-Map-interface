@@ -1,0 +1,60 @@
+plugins {
+    id 'org.springframework.boot' version '2.1.3.RELEASE'
+    id 'java'
+    id 'idea'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.tess4j'
+version = '1.2'
+sourceCompatibility = '1.8'
+
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // spring boot
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    //spring data mongodb
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+
+    compile group: 'net.sourceforge.tess4j', name: 'tess4j', version: '4.3.1'
+
+    //Commons Codec for Base 64
+    compile "commons-codec:commons-codec:1.12"
+
+    //Commons IO
+    compile group: 'commons-io', name: 'commons-io', version: '2.6'
+
+    //junit
+    testCompile "junit:junit:4.12"
+
+    //rest-assured
+    testCompile group: 'io.rest-assured', name: 'rest-assured', version: '3.3.0'
+
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java']
+        }
+        resources {
+            srcDirs = ['src/main/resources']
+        }
+    }
+}
+
+archivesBaseName = 'ocr-tess4j-rest'
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.tess4j.rest.Tess4jV1'
+    }
+}
+
